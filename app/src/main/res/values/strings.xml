@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StackOverflowKotlin</string>
+    <string name="owner_profile_image">Owner Profile Image</string>
+    <string name="owner_creation_date">Posted by %s on %s</string>
+    <string name="viewed_question">Viewed %d times</string>
+    <string name="answers">Answers: %d</string>
+    <string name="show_question">Show Question</string>
+
 </resources>

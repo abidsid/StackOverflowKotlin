@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.stackoverflowkotlin.utils.Utils" />
+
+        <import type="com.example.stackoverflowkotlin.data.remote.response.Question" />
+
+        <import type="com.example.stackoverflowkotlin.ui.adapters.QuestionAdapter.QuestionsInterface" />
+
+        <variable
+            name="question"
+            type="Question" />
+
+        <variable
+            name="listener"
+            type="QuestionsInterface" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ownerProfileImg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/owner_profile_image"
+                app:imagePath="@{question.owner.profile_image}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/questionTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{question.title}"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ownerProfileImg"
+                app:layout_constraintTop_toTopOf="@+id/ownerProfileImg"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/owner_and_creation_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{@string/owner_creation_date(question.owner.display_name, Utils.Companion.convertLongToDate(question.creation_date))}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ownerProfileImg"
+                app:layout_constraintTop_toBottomOf="@+id/questionTitle"
+                tools:text="Posted by Owner on 1 July 2021" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/view_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{@string/viewed_question(question.view_count)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ownerProfileImg"
+                app:layout_constraintTop_toBottomOf="@+id/owner_and_creation_date"
+                tools:text="Viewed 51565 Times" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/answer_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{@string/answers(question.answer_count)}"
+                android:textColor="#17971C"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ownerProfileImg"
+                app:layout_constraintTop_toBottomOf="@+id/view_count"
+                tools:text="Answers: 50" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/show_question_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> listener.onShowButtonClick(question.link)}"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="@string/show_question"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/answer_count" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
