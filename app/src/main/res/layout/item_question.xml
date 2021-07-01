@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="com.example.stackoverflowkotlin.utils.Utils" />
 
         <import type="com.example.stackoverflowkotlin.data.remote.response.Question" />
 
@@ -72,11 +68,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{@string/owner_creation_date(question.owner.display_name, Utils.Companion.convertLongToDate(question.creation_date))}"
                 android:textColor="@color/black"
+                app:creationDate="@{question.creation_date}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ownerProfileImg"
                 app:layout_constraintTop_toBottomOf="@+id/questionTitle"
+                app:ownerName="@{question.owner.display_name}"
                 tools:text="Posted by Owner on 1 July 2021" />
 
             <com.google.android.material.textview.MaterialTextView
